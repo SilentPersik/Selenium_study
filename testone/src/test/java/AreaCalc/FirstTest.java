@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class FirstTest {
+
     @Test
     public void TestGoogleSearch() {
         WebDriver driver = new ChromeDriver();
@@ -17,5 +18,6 @@ public class FirstTest {
         searchbox.sendKeys("ChromeDriver");
         searchbox.submit();
         driver.quit();
+
     }
 }
