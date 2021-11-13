@@ -24,7 +24,6 @@ public class LiteCart_AdminLogin {
         WebElement login = driver.findElement(By.name("login"));
         login.click();
         driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-        driver.get("http://localhost/litecart/admin/");
         driver.quit();
     }
 }
