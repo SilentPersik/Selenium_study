@@ -14,6 +14,7 @@ public class LiteCart_AdminLogin {
     @Test
     public void LiteCart_AdminLogin() {
         WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         driver.get("http://localhost/litecart/admin/");
         WebElement username = driver.findElement(By.name("username"));
         username.sendKeys("admin");
@@ -23,7 +24,6 @@ public class LiteCart_AdminLogin {
         checkbox.click();
         WebElement login = driver.findElement(By.name("login"));
         login.click();
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         driver.quit();
     }
 }
