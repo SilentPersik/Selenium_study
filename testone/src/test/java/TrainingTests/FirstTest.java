@@ -1,5 +1,4 @@
-
-package AreaCalc;
+package TrainingTests;
 
 import org.junit.Test;
 import org.openqa.selenium.By;

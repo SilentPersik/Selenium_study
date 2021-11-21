@@ -1,6 +1,5 @@
-package AreaCalc;
+package TrainingTests;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class LiteCart_AdminLogin {
+public class TestLiteCart_AdminLogin {
+
+    private WebDriver driver = new ChromeDriver();
 
     @Test
-    public void LiteCart_AdminLogin() {
-        WebDriver driver = new ChromeDriver();
+    public void TestLiteCart_AdminLogin1() {
         driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         driver.get("http://localhost/litecart/admin/");
         WebElement username = driver.findElement(By.name("username"));
