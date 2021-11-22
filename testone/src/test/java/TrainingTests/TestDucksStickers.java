@@ -17,13 +17,12 @@ public class TestDucksStickers {
     public void MightyDucks() {
         driver.manage().window().maximize();
         driver.navigate().to("http://localhost/litecart");
-        List<WebElement> Stickers = driver.findElements(By.xpath("//*[contains (@class,'sticker')]"));
-        List<WebElement> Goods = driver.findElements(By.xpath("//*[contains (@class,'product column')]"));
-        Assert.assertEquals(Stickers.size(), Goods.size());
-        /*
-        * Просто сравниваю выборку стикеров и выборку товаров. В случае расхождений,
-        * количество стикеров на каждый товар не может быть равным 1, следовательно, тест падает.
-        */
+        List<WebElement> Products = driver.findElements(By.xpath("//*[contains (@class,'product column')]"));
+        for (int b = 0; b < Products.size(); b++) {
+            Products = driver.findElements(By.xpath("//*[contains (@class,'product column')]"));
+            Products.get(b).findElements(By.xpath("//*[contains (@class,'sticker')]"));
+            Assert.assertTrue(driver.findElements(By.xpath("//*[contains (@class,'sticker')]")).size() == Products.size());
+        }
         driver.quit();
     }
 }
