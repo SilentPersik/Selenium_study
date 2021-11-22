@@ -17,11 +17,10 @@ public class TestDucksStickers {
     public void MightyDucks() {
         driver.manage().window().maximize();
         driver.navigate().to("http://localhost/litecart");
+
         List<WebElement> Products = driver.findElements(By.xpath("//*[contains (@class,'product column')]"));
-        for (int b = 0; b < Products.size(); b++) {
-            Products = driver.findElements(By.xpath("//*[contains (@class,'product column')]"));
-            Products.get(b).findElements(By.xpath("//*[contains (@class,'sticker')]"));
-            Assert.assertEquals(driver.findElements(By.xpath("//*[contains (@class,'sticker')]")).size(), Products.size());
+        for (WebElement e : Products) {
+        Assert.assertEquals(e.findElements(By.className("sticker")).size(), 1);
         }
         driver.quit();
     }
