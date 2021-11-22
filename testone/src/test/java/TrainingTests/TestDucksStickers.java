@@ -21,7 +21,7 @@ public class TestDucksStickers {
         for (int b = 0; b < Products.size(); b++) {
             Products = driver.findElements(By.xpath("//*[contains (@class,'product column')]"));
             Products.get(b).findElements(By.xpath("//*[contains (@class,'sticker')]"));
-            Assert.assertTrue(driver.findElements(By.xpath("//*[contains (@class,'sticker')]")).size() == Products.size());
+            Assert.assertEquals(driver.findElements(By.xpath("//*[contains (@class,'sticker')]")).size(), Products.size());
         }
         driver.quit();
     }
