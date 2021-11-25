@@ -1,6 +1,7 @@
 package TrainingTests;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -52,12 +53,12 @@ public class TestCountriesSort_and_Timezones {
         CheckSortInList(root, table, name, true, true);
 
         table = "./tr[@class='row']/td[6]";
-        List<WebElement> ListWE= FillListWEl(root, table);
+        List<WebElement> ListWE = FillListWEl(root, table);
         List<String> listS = FillList(ListWE, true, true);
         int i = 1;
-        for (String zone:listS){
+        for (String zone : listS) {
             if (!zone.equals("0")) {
-                table = "./tr[@class='row'][" + i +"]/td[5]/a";
+                table = "./tr[@class='row'][" + i + "]/td[5]/a";
                 name = CurrentWEl(root, table).getAttribute("textContent");
                 CurrentWEl(root, table).click();
                 table = "./tr/td[3]";
@@ -74,7 +75,7 @@ public class TestCountriesSort_and_Timezones {
         String root = "td#content table.dataTable tbody";
         String table = ".//tr/td[3]//option[@selected='selected']";
         int graph = driver.findElements(By.cssSelector("td#content table.dataTable tr.row")).size();
-        for (int i=1; i<=graph; i++) {
+        for (int i = 1; i <= graph; i++) {
             zone = ".//tr[@class='row'][" + i + "]/td[3]/a";
             name = CurrentWEl(root, zone).getAttribute("textContent");
             CurrentWEl(root, zone).click();
@@ -84,7 +85,7 @@ public class TestCountriesSort_and_Timezones {
         }
     }
 
-    private void ButtonCancel_Click () {
+    private void ButtonCancel_Click() {
         driver.findElement(By.cssSelector("td#content p button[name=cancel]")).click();
     }
 
@@ -93,12 +94,13 @@ public class TestCountriesSort_and_Timezones {
         return root.findElement(By.xpath(element));
     }
 
-    private void CheckSortInList(String rootLoc, String tableLoc, String name, boolean first, boolean last){
+    private void CheckSortInList(String rootLoc, String tableLoc, String name, boolean first, boolean last) {
         List<WebElement> listWE = FillListWEl(rootLoc, tableLoc);
         List<String> list = FillList(listWE, first, last);
+        Assert.assertTrue(IsListSorted(list)); // Проверка!
     }
 
-    private List<WebElement> FillListWEl(String rootLoc, String tableLoc){
+    private List<WebElement> FillListWEl(String rootLoc, String tableLoc) {
         WebElement root = driver.findElement(By.cssSelector(rootLoc));
         List<WebElement> ListWEl = root.findElements(By.xpath(tableLoc));
         return ListWEl;
@@ -106,17 +108,32 @@ public class TestCountriesSort_and_Timezones {
 
     private List<String> FillList(List<WebElement> listWEl, boolean first, boolean last) {
         List<String> resultList = new ArrayList<>();
-        for (WebElement we:listWEl)
+        for (WebElement we : listWEl)
             resultList.add(we.getAttribute("textContent"));
         if (!first) resultList.remove(0);
-        if (!last) resultList.remove(resultList.size()-1);
+        if (!last) resultList.remove(resultList.size() - 1);
         return resultList;
     }
 
-        private void SearchAndClick(String point) {
-        String locator="", currentPage = "";
+    private boolean IsListSorted(List<String> list) {
+        String previous = list.get(0);
+        String current;
+        boolean result = true;
+        for (int i = 1; i < list.size(); i++) {
+            current = list.get(i);
+            if (current.compareTo(previous) < 0) {
+                result = false;
+                break;
+            }
+            previous = current;
+        }
+        return result;
+    }
+
+    private void SearchAndClick(String point) {
+        String locator = "", currentPage = "";
         int i = 0;
-        while( !currentPage.equals(point) ) {
+        while (!currentPage.equals(point)) {
             i++;
             locator = "ul#box-apps-menu li#app-:nth-child(" + i + ")";
             if (IsElementPresent(driver, By.cssSelector(locator)))
@@ -125,7 +142,7 @@ public class TestCountriesSort_and_Timezones {
         driver.findElement(By.cssSelector(locator)).click();
     }
 
-        boolean IsElementPresent(WebDriver driver, By locator) {
+    boolean IsElementPresent(WebDriver driver, By locator) {
         try {
             driver.findElement(locator);
             return true;
