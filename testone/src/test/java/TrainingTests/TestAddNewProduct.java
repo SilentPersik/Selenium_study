@@ -20,13 +20,13 @@ public class TestAddNewProduct {
     private WebDriver driver;
 
     @Before
-    public void start() {
+    public void Start() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @Test
-    public void General() throws InterruptedException {
+    public void General() {
         driver.get("http://localhost/litecart/admin/");
         WebElement username = driver.findElement(By.name("username"));
         username.sendKeys("admin");
@@ -102,7 +102,7 @@ public class TestAddNewProduct {
     }
 
     @After
-    public void stop() {
+    public void Stop() {
         driver.quit();
     }
 }
