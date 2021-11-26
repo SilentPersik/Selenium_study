@@ -26,7 +26,8 @@ public class TestAddNewProduct {
     }
 
     @Test
-    public void General() {
+    public void General() throws InterruptedException {
+
         driver.get("http://localhost/litecart/admin/");
         WebElement username = driver.findElement(By.name("username"));
         username.sendKeys("admin");

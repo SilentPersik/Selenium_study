@@ -29,6 +29,7 @@ public class TestTruePagesofGoods {
 
     @Test
     public void General() {
+
         driver.get("http://localhost/litecart/en/");
         String[] ListMainPage;
         String[] ListItemPage;

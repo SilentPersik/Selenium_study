@@ -23,7 +23,8 @@ public class TestRegistrationNewMember {
     }
 
     @Test
-    public void General() {
+    public void General() throws InterruptedException {
+
         driver.get("http://localhost/litecart/en/");
 
         String email = "Cleant_Eastwood@gmail.com";
