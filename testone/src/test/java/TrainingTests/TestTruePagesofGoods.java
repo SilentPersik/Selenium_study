@@ -16,7 +16,7 @@ public class TestTruePagesofGoods {
     private WebDriver driver;
 
     @Before
-    public void start() {
+    public void Start() {
         driver = new ChromeDriver();
         /*driver = new FirefoxDriver();
          * driver = new InternetExplorerDriver();
@@ -69,7 +69,7 @@ public class TestTruePagesofGoods {
     }
 
     @After
-    public void stop() {
+    public void Stop() {
         driver.quit();
     }
 }
