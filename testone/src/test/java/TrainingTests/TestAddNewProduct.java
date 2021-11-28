@@ -22,6 +22,7 @@ public class TestAddNewProduct {
     @Before
     public void Start() {
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
@@ -104,6 +105,7 @@ public class TestAddNewProduct {
 
     @After
     public void Stop() {
+
         driver.quit();
     }
 }

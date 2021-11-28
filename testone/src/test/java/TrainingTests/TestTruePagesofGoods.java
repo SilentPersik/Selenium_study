@@ -7,9 +7,13 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestTruePagesofGoods {
 
@@ -17,9 +21,10 @@ public class TestTruePagesofGoods {
 
     @Before
     public void Start() {
-        driver = new ChromeDriver();
-        /*driver = new FirefoxDriver();
-         * driver = new InternetExplorerDriver();
+        //driver = new ChromeDriver();
+        driver = new FirefoxDriver();
+        //driver = new InternetExplorerDriver();
+         /*
          * Возможно ли такое представление выбора драйверов?
          * В случае необходимости просто раскомментировать строку с необходимым драйвером.
          * Либо необходимо прописать для этого отдельный класс?
@@ -43,28 +48,24 @@ public class TestTruePagesofGoods {
         ListItemPage = FillList(item);
         ListItemPage[0] = driver.findElement(By.cssSelector("div#box-product h1.title")).getText();
 
-        Assert.assertEquals(ListMainPage[0], ListItemPage[0]);
-        Assert.assertEquals(ListMainPage[1], ListItemPage[1]);
-        Assert.assertEquals(ListMainPage[5], ListItemPage[5]);
-        Assert.assertTrue(ListMainPage[2] != ListItemPage[2]);
-        Assert.assertTrue(ListMainPage[3] != ListItemPage[3]);
-        Assert.assertTrue(ListMainPage[6] != ListItemPage[6]);
-        Assert.assertTrue(ListMainPage[7] != ListItemPage[7]);
-        Assert.assertTrue(ListMainPage[8].compareTo(ListItemPage[4]) > 0);
-        Assert.assertTrue(ListMainPage[4].compareTo(ListItemPage[8]) < 0);
+        Assert.assertEquals(ListMainPage[0], ListItemPage[0]); // на главной странице и на странице товара совпадает текст названия товара.
+        Assert.assertEquals(ListMainPage[1], ListItemPage[1]); // на главной странице и на странице товара совпадают цены: обычная и -->
+        Assert.assertEquals(ListMainPage[5], ListItemPage[5]); //                                                             акционная.
+        Assert.assertEquals("s", ListMainPage[3]);// обычная цена зачёркнутая на главной странице.
+        Assert.assertEquals("s", ListItemPage[3]);// обычная цена зачёркнутая на странице товара.
     }
 
     private String[] FillList(WebElement root) {
         String[] List = new String[9];
-        List[1] = root.findElement(By.cssSelector("s.regular-price")).getText();
-        List[2] = root.findElement(By.cssSelector("s.regular-price")).getCssValue("color");
-        List[3] = root.findElement(By.cssSelector("s.regular-price")).getCssValue("text-decoration");
-        List[4] = root.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size");
+        List[1] = root.findElement(By.cssSelector("s.regular-price")).getText(); // величина обычной цены.
+        List[2] = root.findElement(By.cssSelector("s.regular-price")).getCssValue("color"); // цвет шрифта обычной цены.
+        List[3] = root.findElement(By.cssSelector("s.regular-price")).getTagName();// критерий наличия специального тега, обозначающего зачеркнутость обычной цены.
+        List[4] = root.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size"); // размер шрифта обычной цены.
 
-        List[5] = root.findElement(By.cssSelector("strong.campaign-price")).getText();
-        List[6] = root.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color");
-        List[7] = root.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-weight");
-        List[8] = root.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size");
+        List[5] = root.findElement(By.cssSelector("strong.campaign-price")).getText(); // величина акционной цены.
+        List[6] = root.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color"); // цвет шрифта акционной цены.
+        List[7] = root.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-weight"); // толщина шрифта акционной цены.
+        List[8] = root.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size"); // размер шрифта акционной цены.
 
         return List;
     }
