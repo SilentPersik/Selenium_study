@@ -89,7 +89,6 @@ public class TestRegistrationNewMember {
 
     @After
     public void Stop() {
-
         driver.quit();
     }
 }

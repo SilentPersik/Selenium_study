@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -32,7 +31,7 @@ public class TestShoppingCart {
     @Test
     public void General() throws InterruptedException {
         driver.get("http://localhost/litecart/en/");
-        for (int i = 1; i<=3; i++) {
+        for (int i = 1; i <= 3; i++) {
             addProductToCart();
             driver.findElement(By.id("logotype-wrapper")).click();
         }
@@ -49,7 +48,7 @@ public class TestShoppingCart {
         itemCount = next.toString();
         driver.findElement(By.cssSelector("div.content div.name")).click();
 
-        if (!isElementNotPresent(driver, By.cssSelector("td.options")) ) {
+        if (!isElementNotPresent(driver, By.cssSelector("td.options"))) {
             int count = driver.findElements(By.cssSelector("td.options option")).size();
             choiseFromSelect(By.cssSelector("select[name='options[Size]'"), count, false);
         }
@@ -63,14 +62,14 @@ public class TestShoppingCart {
 
     private void choiseFromSelect(By locator, int size, boolean isFirst) {
         Select menu = new Select(driver.findElement(locator));
-        int index = (int)(Math.random()*size);
-        if (!isFirst && index==0) index++;
+        int index = (int) (Math.random() * size);
+        if (!isFirst && index == 0) index++;
         menu.selectByIndex(index);
     }
 
-    private void clearCart(){
+    private void clearCart() {
         int count = driver.findElements(By.cssSelector("li.shortcut")).size();
-        for (int i=count; i>1; i--) {
+        for (int i = count; i > 1; i--) {
             driver.findElement(By.cssSelector("li.shortcut")).click();
             driver.findElement(By.name("remove_cart_item")).click();
             implicitlyWaitOff();
