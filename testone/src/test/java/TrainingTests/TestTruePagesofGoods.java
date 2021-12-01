@@ -51,12 +51,12 @@ public class TestTruePagesofGoods {
         Assert.assertEquals(ListMainPage[0], ListItemPage[0]); // на главной странице и на странице товара совпадает текст названия товара.
         Assert.assertEquals(ListMainPage[1], ListItemPage[1]); // на главной странице и на странице товара совпадают величины цен: обычной и -->
         Assert.assertEquals(ListMainPage[5], ListItemPage[5]); //                                                             акционной.
-        Assert.assertEquals("s", ListMainPage[3]);// обычная цена зачёркнутая на главной странице.
-        Assert.assertEquals("s", ListItemPage[3]);// обычная цена зачёркнутая на странице товара.
+        Assert.assertEquals("s", ListMainPage[3]); // обычная цена зачёркнутая на главной странице.
+        Assert.assertEquals("s", ListItemPage[3]); // обычная цена зачёркнутая на странице товара.
         Assert.assertTrue(grayColorCheck(ListMainPage[2].replaceAll("rgba", ""))); // серый шрифт обычной цены на главной странице.
         Assert.assertTrue(grayColorCheck(ListItemPage[2].replaceAll("rgba", ""))); // серый шрифт обычной цены на странице товара.
-        Assert.assertEquals("strong", ListMainPage[7]);// акционная цена жирная на главной странице.
-        Assert.assertEquals("strong", ListItemPage[7]);// акционная цена жирная на странице товара.
+        Assert.assertEquals("strong", ListMainPage[7]); // акционная цена жирная на главной странице.
+        Assert.assertEquals("strong", ListItemPage[7]); // акционная цена жирная на странице товара.
         Assert.assertTrue(redColorCheck(ListMainPage[6].replaceAll("rgba", ""))); // красный шрифт акционной цены на главной странице.
         Assert.assertTrue(redColorCheck(ListItemPage[6].replaceAll("rgba", ""))); // красный шрифт акционной цены на странице товара.
 

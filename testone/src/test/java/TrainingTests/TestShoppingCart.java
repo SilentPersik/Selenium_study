@@ -24,6 +24,7 @@ public class TestShoppingCart {
     public void Start() {
         driver = new FirefoxDriver();
         //driver = new ChromeDriver();
+        driver.manage().window().maximize();
         implicitlyWaitOn();
         wait = new WebDriverWait(driver, 10/*seconds*/);
     }
@@ -68,7 +69,7 @@ public class TestShoppingCart {
     }
 
     private void clearCart() {
-        int count = driver.findElements(By.cssSelector("li.shortcut")).size();
+        int count = driver.findElements(By.cssSelector("li.shortcut")).size(); // В данном цикле происходит подсчет и удаление ВСЕХ элементов таблицы корзины, КРОМЕ последнего.
         for (int i = count; i > 1; i--) {
             driver.findElement(By.cssSelector("li.shortcut")).click();
             driver.findElement(By.name("remove_cart_item")).click();
@@ -77,10 +78,12 @@ public class TestShoppingCart {
                     By.cssSelector("table.dataTable td.item"), i));
             implicitlyWaitOn();
         }
-        driver.findElement(By.name("remove_cart_item")).click();
+        isElementPresent(driver, By.cssSelector("table.dataTable td.item")); // Проверка наличия элементов в таблице корзины.
+        driver.findElement(By.name("remove_cart_item")).click(); // Удаление ПОСЛЕДНЕГО оставшегося элемента после предыдущего цикла.
         implicitlyWaitOff();
-        wait.until(ExpectedConditions.stalenessOf(
-                driver.findElement(By.cssSelector("table.dataTable"))));
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("table.dataTable td.item"), 0)); // Ожидание получения количества элементов таблицы, равного 0.
+        // Возможно, данное ожидание избыточно. И без него мне не удалось воспроизвести ни одного теста с ошибкой.
+        // Однако, в задании написано "удалить все товары из корзины один за другим, после каждого удаления подождать, пока внизу обновится таблица", что я и делаю.
         implicitlyWaitOn();
     }
 
