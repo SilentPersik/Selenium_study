@@ -73,7 +73,7 @@ public class TestTruePagesofGoods {
         String[] List = new String[9];
         List[1] = root.findElement(By.cssSelector("s.regular-price")).getText(); // величина обычной цены.
         List[2] = root.findElement(By.cssSelector("s.regular-price")).getCssValue("color"); // цвет шрифта обычной цены.
-        List[3] = root.findElement(By.cssSelector("s.regular-price")).getTagName();// критерий наличия специального тега, обозначающего зачеркнутость обычной цены.
+        List[3] = root.findElement(By.cssSelector("s.regular-price")).getTagName(); // критерий наличия специального тега, обозначающего зачеркнутость обычной цены.
         List[4] = root.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size"); // размер шрифта обычной цены.
 
         List[5] = root.findElement(By.cssSelector("strong.campaign-price")).getText(); // величина акционной цены.
