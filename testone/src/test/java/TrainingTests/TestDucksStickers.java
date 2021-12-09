@@ -20,7 +20,7 @@ public class TestDucksStickers {
 
         List<WebElement> Products = driver.findElements(By.xpath("//*[contains (@class,'product column')]"));
         for (WebElement e : Products) {
-        Assert.assertEquals(e.findElements(By.className("sticker")).size(), 1);
+            Assert.assertEquals(e.findElements(By.className("sticker")).size(), 1);
         }
         driver.quit();
     }
